@@ -5,8 +5,13 @@ public class Collector : MonoBehaviour
 {
 	public event Action PickUpedCoin;
 
-	public void CoinPickUp()
+	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		PickUpedCoin?.Invoke();
+		if (collision.gameObject.TryGetComponent<Coin>(out Coin coin))
+		{
+			PickUpedCoin?.Invoke();
+
+			coin.OnDestroy();
+		}
 	}
 }

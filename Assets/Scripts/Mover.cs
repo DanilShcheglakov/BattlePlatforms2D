@@ -8,14 +8,14 @@ public class Mover : MonoBehaviour
 
 	[SerializeField] private float _speed = 2f;
 	[SerializeField] private float _jumpForce = 200f;
-	[SerializeField] GroundChecker _groundChecker;
+	[SerializeField] private GroundChecker _groundChecker;
+	[SerializeField] private UserInut _userInput;
 
 	private Rigidbody2D _rigidbody;
 
 	private float _direction = 1f;
 	private float _currentDirection = 1f;
 
-	private bool _isJump = false;
 	private bool _isGround = false;
 
 	public float Direction => _direction;
@@ -40,23 +40,17 @@ public class Mover : MonoBehaviour
 		_rigidbody = GetComponent<Rigidbody2D>();
 	}
 
-	private void Update()
-	{
-		ReadHorizontalAxis();
-		ReadJump();
-	}
-
 	private void FixedUpdate()
 	{
 		ChangeSpeed();
 
-		if (_isJump)
+		if (_userInput.IsSpaceDown && _isGround)
 			StartJump();
 	}
 
-	private void ReadHorizontalAxis()
+	private void ChangeSpeed()
 	{
-		_direction = Input.GetAxis(Horizontal);
+		_direction = _userInput.HorizontalAxisValue;
 
 		if (_direction > 0 && _currentDirection < 0)
 		{
@@ -71,16 +65,7 @@ public class Mover : MonoBehaviour
 
 			ChangedDirection?.Invoke();
 		}
-	}
 
-	private void ReadJump()
-	{
-		if (Input.GetKeyDown(KeyCode.Space) && _isGround)
-			_isJump = true;
-	}
-
-	private void ChangeSpeed()
-	{
 		_rigidbody.velocity = new Vector2(_direction * _speed * Time.fixedDeltaTime, _rigidbody.velocity.y);
 	}
 
@@ -89,7 +74,6 @@ public class Mover : MonoBehaviour
 		Jumping?.Invoke();
 
 		_rigidbody.AddForce(Vector2.up * _jumpForce);
-		_isJump = false;
 	}
 
 	private void TouchDoun()

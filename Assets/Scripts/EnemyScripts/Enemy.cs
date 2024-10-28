@@ -3,7 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D), typeof(EnemyMover))]
 public class Enemy : MonoBehaviour
 {
-	[SerializeField] private EnemyAnimationManager _animationManager;
+	[SerializeField] private EnemyAnimationSettings _animationManager;
 	private EnemyMover _mover;
 
 	private void Awake()

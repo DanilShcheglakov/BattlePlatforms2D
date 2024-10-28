@@ -2,12 +2,8 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
-	private void OnTriggerEnter2D(Collider2D collision)
+	public void OnDestroy()
 	{
-		if (collision.TryGetComponent(out Collector collector))
-		{
-			collector.CoinPickUp();
-			Destroy(gameObject);
-		}
+		Destroy(gameObject); 
 	}
 }

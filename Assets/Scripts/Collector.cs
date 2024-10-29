@@ -11,7 +11,7 @@ public class Collector : MonoBehaviour
 		{
 			PickUpedCoin?.Invoke();
 
-			coin.OnDestroy();
+			coin.Destroy();
 		}
 	}
 }

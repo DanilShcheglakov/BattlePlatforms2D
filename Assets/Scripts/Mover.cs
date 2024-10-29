@@ -4,8 +4,6 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Mover : MonoBehaviour
 {
-	private const string Horizontal = nameof(Horizontal);
-
 	[SerializeField] private float _speed = 2f;
 	[SerializeField] private float _jumpForce = 200f;
 	[SerializeField] private GroundChecker _groundChecker;
@@ -16,24 +14,10 @@ public class Mover : MonoBehaviour
 	private float _direction = 1f;
 	private float _currentDirection = 1f;
 
-	private bool _isGround = false;
-
-	public float Direction => _direction;
-
-	public event Action ChangedDirection;
+	public event Action DirectionChanged;
 	public event Action Jumping;
 
-	private void OnEnable()
-	{
-		_groundChecker.Grounded += TouchDoun;
-		_groundChecker.Fly += Fly;
-	}
-
-	private void OnDisable()
-	{
-		_groundChecker.Grounded -= TouchDoun;
-		_groundChecker.Fly -= Fly;
-	}
+	public float Direction => _direction;
 
 	private void Start()
 	{
@@ -44,7 +28,7 @@ public class Mover : MonoBehaviour
 	{
 		ChangeSpeed();
 
-		if (_userInput.IsSpaceDown && _isGround)
+		if (_userInput.IsSpaceDown && _groundChecker.IsGrounded)
 			StartJump();
 	}
 
@@ -56,14 +40,14 @@ public class Mover : MonoBehaviour
 		{
 			_currentDirection = _direction;
 
-			ChangedDirection?.Invoke();
+			DirectionChanged?.Invoke();
 		}
 
 		if (_direction < 0f && _currentDirection > 0)
 		{
 			_currentDirection = _direction;
 
-			ChangedDirection?.Invoke();
+			DirectionChanged?.Invoke();
 		}
 
 		_rigidbody.velocity = new Vector2(_direction * _speed * Time.fixedDeltaTime, _rigidbody.velocity.y);
@@ -74,15 +58,5 @@ public class Mover : MonoBehaviour
 		Jumping?.Invoke();
 
 		_rigidbody.AddForce(Vector2.up * _jumpForce);
-	}
-
-	private void TouchDoun()
-	{
-		_isGround = true;
-	}
-
-	private void Fly()
-	{
-		_isGround = false;
 	}
 }

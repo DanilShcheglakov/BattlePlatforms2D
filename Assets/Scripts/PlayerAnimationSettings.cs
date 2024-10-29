@@ -14,24 +14,20 @@ public class PlayerAnimationSettings : MonoBehaviour
 	private Transform _transform;
 	private Animator _animator;
 
-	private bool _isGrounded = false;
-
 	private void OnEnable()
 	{
-		_mover.ChangedDirection += InvertDirection;
+		_mover.DirectionChanged += InvertDirection;
 		_mover.Jumping += StartJump;
 
-		_groundChecker.Grounded += TouchDown;
-		_groundChecker.Fly += Fly;
+		_groundChecker.ConditionsChanged += SetAnimationCondidtionIsGrounded;
 	}
 
 	private void OnDisable()
 	{
-		_mover.ChangedDirection -= InvertDirection;
+		_mover.DirectionChanged -= InvertDirection;
 		_mover.Jumping -= StartJump;
 
-		_groundChecker.Grounded -= TouchDown;
-		_groundChecker.Fly -= Fly;
+		_groundChecker.ConditionsChanged -= SetAnimationCondidtionIsGrounded;
 	}
 
 	private void Awake()
@@ -53,18 +49,9 @@ public class PlayerAnimationSettings : MonoBehaviour
 		_transform.Rotate(rotate);
 	}
 
-	private void TouchDown()
+	private void SetAnimationCondidtionIsGrounded()
 	{
-		_isGrounded = true;
-
-		_animator.SetBool(IsGrounded, _isGrounded);
-	}
-
-	private void Fly()
-	{
-		_isGrounded = false;
-
-		_animator.SetBool(IsGrounded, _isGrounded);
+		_animator.SetBool(IsGrounded, _groundChecker.IsGrounded);
 	}
 
 	private void StartJump()

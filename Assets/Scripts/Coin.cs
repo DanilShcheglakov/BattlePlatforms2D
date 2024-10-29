@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
-	public void OnDestroy()
+	public void Destroy()
 	{
 		Destroy(gameObject); 
 	}

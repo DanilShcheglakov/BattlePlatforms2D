@@ -7,6 +7,8 @@ public class UserInut : MonoBehaviour
 	public float HorizontalAxisValue { get; private set; }
 	public bool IsSpaceDown { get; private set; }
 
+	private KeyCode _jump = KeyCode.Space;
+
 	private void Update()
 	{
 		HorizontalAxisValue = ReadHorizontal();
@@ -20,6 +22,6 @@ public class UserInut : MonoBehaviour
 
 	private bool CheckSpaceDon()
 	{
-		return Input.GetKeyDown(KeyCode.Space);
+		return Input.GetKeyDown(_jump);
 	}
 }

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CameraRig : MonoBehaviour
 {
-	[SerializeField] private float Offset = 2f;
+	[SerializeField] private float _offset = 2f;
 	[SerializeField] private Transform _target;
 
 	private Vector3 _differenceOfPosition;
@@ -22,7 +22,7 @@ public class CameraRig : MonoBehaviour
 
 	private bool IsTargetGetOut()
 	{
-		return _differenceOfPosition.sqrMagnitude > Offset * Offset;
+		return _differenceOfPosition.sqrMagnitude > _offset * _offset;
 	}
 
 	private void ChangePosition()

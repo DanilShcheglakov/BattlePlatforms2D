@@ -9,26 +9,10 @@ public class PlayerAnimationSettings : MonoBehaviour
 	private const string Jump = nameof(Jump);
 
 	[SerializeField] private GroundChecker _groundChecker;
-	[SerializeField] private Mover _mover;
+	[SerializeField] private Player _player;
 
 	private Transform _transform;
 	private Animator _animator;
-
-	private void OnEnable()
-	{
-		_mover.DirectionChanged += InvertDirection;
-		_mover.Jumping += StartJump;
-
-		_groundChecker.ConditionsChanged += SetAnimationCondidtionIsGrounded;
-	}
-
-	private void OnDisable()
-	{
-		_mover.DirectionChanged -= InvertDirection;
-		_mover.Jumping -= StartJump;
-
-		_groundChecker.ConditionsChanged -= SetAnimationCondidtionIsGrounded;
-	}
 
 	private void Awake()
 	{
@@ -36,9 +20,25 @@ public class PlayerAnimationSettings : MonoBehaviour
 		_transform = GetComponent<Transform>();
 	}
 
+	private void OnEnable()
+	{
+		_player.DirectionChanged += InvertDirection;
+		_player.Jumping += StartJump;
+
+		_groundChecker.ConditionsChanged += SetAnimationCondidtionIsGrounded;
+	}
+
+	private void OnDisable()
+	{
+		_player.DirectionChanged -= InvertDirection;
+		_player.Jumping -= StartJump;
+
+		_groundChecker.ConditionsChanged -= SetAnimationCondidtionIsGrounded;
+	}
+
 	private void Update()
 	{
-		_animator.SetFloat(Speed, math.abs(_mover.Direction));
+		_animator.SetFloat(Speed, math.abs(_player.Direction));
 	}
 
 	private void InvertDirection()

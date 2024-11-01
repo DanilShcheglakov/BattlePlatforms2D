@@ -14,7 +14,7 @@ public class EnemyMover : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		ChangeSpeed();
+		Move();
 	}
 
 	public void ChangeDirecton()
@@ -22,7 +22,7 @@ public class EnemyMover : MonoBehaviour
 		_enemySpeed *= -1;
 	}
 
-	private void ChangeSpeed()
+	private void Move()
 	{
 		_rigidBody.velocity = new Vector2(_enemySpeed * Time.fixedDeltaTime, _rigidBody.velocity.y);
 	}

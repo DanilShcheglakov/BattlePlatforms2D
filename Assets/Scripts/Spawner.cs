@@ -4,34 +4,25 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
 	[SerializeField] private GameObject _prefab;
-	[SerializeField] private Transform _spawnPosition;
-
-	private List<Transform> _spawnPositions = new List<Transform>();
-	private int _currentPositionIndex = 1;
+	[SerializeField] private List<Transform> _spawnPositions;
 
 	private void Awake()
 	{
 		FillTransformPositions();
 
-		while (TryGetSpawnPoint(out Transform spawnPoint))
+		foreach (var spawnPoint in _spawnPositions)
 			Instantiate(_prefab, spawnPoint);
 	}
 
-	private bool TryGetSpawnPoint(out Transform spawnPoint)
-	{
-		spawnPoint = null;
-
-		if (_currentPositionIndex == _spawnPositions.Count)
-			return false;
-
-		spawnPoint = _spawnPositions[_currentPositionIndex];
-		_currentPositionIndex++;
-		return true;
-	}
-
+#if UNITY_EDITOR
+	[ContextMenu("Refresh Spawn Points")]
 	private void FillTransformPositions()
 	{
-		foreach (Transform spawnPoint in _spawnPosition.GetComponentsInChildren<Transform>())
-			_spawnPositions.Add(spawnPoint);
+		int pointCount = transform.childCount;
+		_spawnPositions = new List<Transform>();
+
+		for (int i = 0; i < pointCount; i++)
+			_spawnPositions.Add(transform.GetChild(i));
 	}
+#endif
 }

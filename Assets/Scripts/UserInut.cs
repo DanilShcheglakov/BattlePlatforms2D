@@ -5,14 +5,16 @@ public class UserInut : MonoBehaviour
 	private const string Horizontal = nameof(Horizontal);
 
 	public float HorizontalAxisValue { get; private set; }
-	public bool IsSpaceDown { get; private set; }
+	private bool _isSpaceDown;
 
 	private KeyCode _jump = KeyCode.Space;
+
+	public bool IsJump => GetBoolAsTrigger(ref _isSpaceDown);
 
 	private void Update()
 	{
 		HorizontalAxisValue = ReadHorizontal();
-		IsSpaceDown = CheckSpaceDon();
+		_isSpaceDown = CheckSpaceDown();
 	}
 
 	private float ReadHorizontal()
@@ -20,8 +22,15 @@ public class UserInut : MonoBehaviour
 		return Input.GetAxis(Horizontal);
 	}
 
-	private bool CheckSpaceDon()
+	private bool CheckSpaceDown()
 	{
 		return Input.GetKeyDown(_jump);
+	}
+
+	private bool GetBoolAsTrigger(ref bool value)
+	{
+		bool localValue = value;
+		value = false;
+		return localValue;
 	}
 }

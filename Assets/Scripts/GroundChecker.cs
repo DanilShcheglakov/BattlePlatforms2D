@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class GroundChecker : MonoBehaviour
 {
-	public event Action ConditionsChanged;
-
 	private int _detectedCollisionsWithGround = 0;
+
+	public event Action ConditionsChanged;
 
 	public bool IsGrounded => _detectedCollisionsWithGround > 0;
 

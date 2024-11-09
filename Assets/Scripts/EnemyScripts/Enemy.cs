@@ -1,25 +1,63 @@
+using System;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(EnemyMover))]
 public class Enemy : MonoBehaviour
 {
+	[SerializeField] private GameObject _parentObject;
 	[SerializeField] private EnemyAnimationSettings _animationManager;
-	private EnemyMover _mover;
+	[SerializeField] private EnemyMover _mover;
+	[SerializeField] private Health _health;
+	[SerializeField] private EnemyVision _vision;
 
-	private void Awake()
+	public event Action BorderFaced;
+
+	private void OnEnable()
 	{
-		_mover = GetComponent<EnemyMover>();
+		_health.Die += Die;
+		_mover.DirectionChanged += ChangeDirection;
+		_vision.PlayerDetected += SetTarget;
+		_vision.PlayerUnDetected += SetTarget;
+	}
+
+	private void OnDisable()
+	{
+		_health.Die -= Die;
+		_vision.PlayerDetected -= SetTarget;
+		_vision.PlayerUnDetected += SetTarget;
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		if (collision.gameObject.TryGetComponent<Border>(out _))
-			ChangeDirection();
+			BorderFaced?.Invoke();
+
+		if (collision.gameObject.TryGetComponent(out Attack playerAttack))
+			playerAttack.Hitting += TakeDamage;
+	}
+
+	private void OnTriggerExit2D(Collider2D collision)
+	{
+		if (collision.gameObject.TryGetComponent(out Attack playerAttack))
+			playerAttack.Hitting -= TakeDamage;
 	}
 
 	private void ChangeDirection()
 	{
-		_mover.ChangeDirecton();
 		_animationManager.ChangeDirection();
+	}
+
+	private void TakeDamage(int damage)
+	{
+		_health.TakeDamage(damage);
+	}
+
+	private void Die()
+	{
+		Destroy(_parentObject);
+	}
+
+	private void SetTarget(Player target)
+	{
+		_mover.SetTarget(target);
 	}
 }

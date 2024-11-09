@@ -5,8 +5,10 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 	[SerializeField] private Mover _mover;
-	[SerializeField] private UserInut _userInput;
+	[SerializeField] private UserInput _userInput;
 	[SerializeField] private GroundChecker _groundChecker;
+	[SerializeField] private Attack _attack;
+	[SerializeField] private Health _health;
 
 	private Rigidbody2D _rigidbody;
 	private Vector2 _startPosition;
@@ -16,12 +18,22 @@ public class Player : MonoBehaviour
 	public event Action DirectionChanged;
 	public event Action Jumping;
 
-	public float Direction;
+	public float Direction { get; private set; }
 
 	private void Awake()
 	{
 		_rigidbody = GetComponent<Rigidbody2D>();
 		_startPosition = transform.position;
+	}
+
+	private void OnEnable()
+	{
+		_health.Die += Die;
+	}
+
+	private void OnDisable()
+	{
+		_health.Die -= Die;
 	}
 
 	private void FixedUpdate()
@@ -43,10 +55,24 @@ public class Player : MonoBehaviour
 		}
 	}
 
+	private void Update()
+	{
+		if (_userInput.IsAttack)
+			_attack.GiveDamage();
+	}
+
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		if (collision.gameObject.TryGetComponent<DangerZone>(out _))
 			ResetPosition();
+		else if (collision.gameObject.TryGetComponent(out EnemyAttak enemyAttak))
+			enemyAttak.Hitting += GetDamage;
+	}
+
+	private void OnTriggerExit2D(Collider2D collision)
+	{
+		if (collision.gameObject.TryGetComponent(out EnemyAttak enemyAttak))
+			enemyAttak.Hitting -= GetDamage;
 	}
 
 	private void ResetPosition()
@@ -70,5 +96,15 @@ public class Player : MonoBehaviour
 
 			DirectionChanged?.Invoke();
 		}
+	}
+
+	private void GetDamage(int damage)
+	{
+		_health.TakeDamage(damage);
+	}
+
+	private void Die()
+	{
+		Destroy(gameObject);
 	}
 }

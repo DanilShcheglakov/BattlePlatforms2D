@@ -29,9 +29,9 @@ public class EnemyAttak : MonoBehaviour
 		{
 			_isThereAttackTarget = false;
 
-			StopCoroutine(_giveDamage);
+			if (_giveDamage != null)
+				StopCoroutine(_giveDamage);
 		}
-
 	}
 
 	private IEnumerator Attak(Player player)

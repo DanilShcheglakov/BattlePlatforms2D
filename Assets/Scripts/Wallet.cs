@@ -19,7 +19,5 @@ public class Wallet : MonoBehaviour
 	private void AddCoin()
 	{
 		Amaunt++;
-
-		Debug.Log("Δενόγθ: " + Amaunt);
 	}
 }

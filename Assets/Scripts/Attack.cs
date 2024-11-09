@@ -9,9 +9,20 @@ public class Attack : MonoBehaviour
 	private bool _isEnemyInAttackArea;
 	private bool _isRecharged = true;
 
+	WaitForSeconds _delay;
+
 	public event Action<int> Hitting;
 
-	[SerializeField] public float AttackSpeed { get; private set; }
+	private void Awake()
+	{
+		_delay = new WaitForSeconds(_rechargeTime);
+	}
+
+	private void OnTriggerEnter2D(Collider2D collision)
+	{
+		if (collision.gameObject.TryGetComponent(out Enemy enemy))
+			_isEnemyInAttackArea = true;
+	}
 
 	public void GiveDamage()
 	{
@@ -28,12 +39,6 @@ public class Attack : MonoBehaviour
 		}
 	}
 
-	private void OnTriggerEnter2D(Collider2D collision)
-	{
-		if (collision.gameObject.TryGetComponent(out Enemy enemy))
-			_isEnemyInAttackArea = true;
-	}
-
 	private void OnTriggerExit2D(Collider2D collision)
 	{
 		if (collision.gameObject.TryGetComponent(out Enemy enemy))
@@ -42,9 +47,7 @@ public class Attack : MonoBehaviour
 
 	private IEnumerator Recharge()
 	{
-		var delay = new WaitForSeconds(_rechargeTime);
-
-		yield return delay;
+		yield return _delay;
 
 		_isRecharged = true;
 	}

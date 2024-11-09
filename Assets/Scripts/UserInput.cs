@@ -4,7 +4,6 @@ public class UserInput : MonoBehaviour
 {
 	private const string Horizontal = nameof(Horizontal);
 
-	public float HorizontalAxisValue { get; private set; }
 	private bool _isSpaceDown;
 	private bool _isAttakButtonDown;
 
@@ -14,11 +13,13 @@ public class UserInput : MonoBehaviour
 	public bool IsJump => GetBoolAsTrigger(ref _isSpaceDown);
 	public bool IsAttack => GetBoolAsTrigger(ref _isAttakButtonDown);
 
+	public float HorizontalAxisValue { get; private set; }
+
 	private void Update()
 	{
 		HorizontalAxisValue = ReadHorizontal();
-		_isSpaceDown = CheckSpaceDown();
-		_isAttakButtonDown = CheckAttackDown();
+		_isSpaceDown = IsSpaceDown();
+		_isAttakButtonDown = IsAttackDown();
 	}
 
 	private float ReadHorizontal()
@@ -26,12 +27,12 @@ public class UserInput : MonoBehaviour
 		return Input.GetAxis(Horizontal);
 	}
 
-	private bool CheckSpaceDown()
+	private bool IsSpaceDown()
 	{
 		return Input.GetKeyDown(_jump);
 	}
 
-	private bool CheckAttackDown()
+	private bool IsAttackDown()
 	{
 		return Input.GetKeyDown(_attack);
 	}

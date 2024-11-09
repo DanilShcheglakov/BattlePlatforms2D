@@ -8,18 +8,15 @@ public class Collector : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if (collision.gameObject.TryGetComponent(out Coin coin))
+		if (collision.TryGetComponent(out CollectableThing pickUppedObject))
 		{
-			PickUpedCoin?.Invoke();
+			if (pickUppedObject is Coin)
+				PickUpedCoin?.Invoke();
 
-			coin.Destroy();
-		}
+			if (pickUppedObject is AidKit)
+				PickUpedAidKit?.Invoke(((AidKit)pickUppedObject).HealPoints);
 
-		if (collision.gameObject.TryGetComponent(out AidKit aidKit))
-		{
-			PickUpedAidKit?.Invoke(aidKit.HealPoints);
-
-			aidKit.Destroy();
+			pickUppedObject.Destroy();
 		}
 	}
 }

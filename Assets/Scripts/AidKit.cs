@@ -1,11 +1,6 @@
 using UnityEngine;
 
-public class AidKit : MonoBehaviour
+public class AidKit : CollectableThing
 {
 	[field: SerializeField] public int HealPoints { get; private set; }
-
-	public void Destroy()
-	{
-		Destroy(gameObject);
-	}
 }

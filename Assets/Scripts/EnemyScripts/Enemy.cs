@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour
 	{
 		_health.Die += Die;
 		_mover.DirectionChanged += ChangeDirection;
+
 		_vision.PlayerDetected += SetTarget;
 		_vision.PlayerUnDetected += SetTarget;
 	}
@@ -22,8 +23,10 @@ public class Enemy : MonoBehaviour
 	private void OnDisable()
 	{
 		_health.Die -= Die;
+		_mover.DirectionChanged -= ChangeDirection;
+
 		_vision.PlayerDetected -= SetTarget;
-		_vision.PlayerUnDetected += SetTarget;
+		_vision.PlayerUnDetected -= SetTarget;
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
@@ -59,5 +62,10 @@ public class Enemy : MonoBehaviour
 	private void SetTarget(Player target)
 	{
 		_mover.SetTarget(target);
+	}
+
+	private void SetTarget()
+	{
+		_mover.SetTarget(null);
 	}
 }

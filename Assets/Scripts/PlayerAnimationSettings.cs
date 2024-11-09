@@ -1,4 +1,3 @@
-using Unity.Mathematics;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer), typeof(Animator))]
@@ -38,7 +37,7 @@ public class PlayerAnimationSettings : MonoBehaviour
 
 	private void Update()
 	{
-		_animator.SetFloat(Speed, math.abs(_player.Direction));
+		_animator.SetFloat(Speed, Mathf.Abs(_player.Direction));
 	}
 
 	private void InvertDirection()

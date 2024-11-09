@@ -1,9 +1,3 @@
-using UnityEngine;
-
-public class Coin : MonoBehaviour
+public class Coin : CollectableThing
 {
-	public void Destroy()
-	{
-		Destroy(gameObject); 
-	}
 }

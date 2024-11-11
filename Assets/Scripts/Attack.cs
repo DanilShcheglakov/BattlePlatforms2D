@@ -9,7 +9,7 @@ public class Attack : MonoBehaviour
 	private bool _isEnemyInAttackArea;
 	private bool _isRecharged = true;
 
-	WaitForSeconds _delay;
+	private WaitForSeconds _delay;
 
 	public event Action<int> Hitting;
 
@@ -31,8 +31,6 @@ public class Attack : MonoBehaviour
 			Hitting?.Invoke(_damage);
 
 			_isRecharged = false;
-
-			Debug.Log("Attack");
 
 			StartCoroutine(Recharge());
 			StopCoroutine(Recharge());

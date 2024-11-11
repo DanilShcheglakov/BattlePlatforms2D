@@ -19,7 +19,6 @@ public class Health : MonoBehaviour
 	{
 		if (_collector != null)
 			_collector.PickUpedAidKit += Heal;
-
 	}
 
 	private void OnDisable()

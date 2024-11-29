@@ -66,7 +66,7 @@ public class EnemyMover : MonoBehaviour
 
 	private void Follow()
 	{
-		float direction = transform.position.x - _target.transform.position.x;
+		float direction = Mathf.Abs(transform.position.x - _target.transform.position.x);
 
 		Vector2 vector = new Vector2(direction, _rigidBody.velocity.y).normalized * _enemySpeed * Time.fixedDeltaTime;
 

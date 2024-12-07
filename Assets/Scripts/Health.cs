@@ -4,15 +4,16 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
 	[SerializeField] private Collector _collector;
-	[SerializeField] private uint _max;
-	private int _current;
+
+	[field: SerializeField] public uint Max { get; private set; }
+	public int Current { get; private set; }
 
 	public event Action<int> ValueChanged;
 	public event Action Die;
 
 	private void Awake()
 	{
-		_current = (int)_max;
+		Current = (int)Max;
 	}
 
 	private void OnEnable()
@@ -29,25 +30,25 @@ public class Health : MonoBehaviour
 
 	public void TakeDamage(int damage)
 	{
-		_current -= damage;
+		Current -= damage;
 
-		if (_current <= 0)
+		if (Current <= 0)
 		{
-			_current = 0;
+			Current = 0;
 
 			Die?.Invoke();
 		}
 
-		ValueChanged?.Invoke(_current);
+		ValueChanged?.Invoke(Current);
 	}
 
 	public void Heal(int healPoints)
 	{
-		_current += healPoints;
+		Current += healPoints;
 
-		if (_current >= _max)
-			_current = (int)_max;
+		if (Current >= Max)
+			Current = (int)Max;
 
-		ValueChanged?.Invoke(_current);
+		ValueChanged?.Invoke(Current);
 	}
 }

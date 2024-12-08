@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class LiquidHealthBar : BarHealthMotherClass
+public class LiquidHealthBar : HealthBar
 {
 	[SerializeField] private float _maxDelta;
 
@@ -19,11 +19,11 @@ public class LiquidHealthBar : BarHealthMotherClass
 	{
 		var delay = new WaitForEndOfFrame();
 
-		float currentBarValue = ((float)currentHealth) / _healthClass.Max;
+		float currentBarValue = ((float)currentHealth) / HealthClass.Max;
 
-		while (currentBarValue != _healtBar.value)
+		while (currentBarValue != HealtBar.value)
 		{
-			_healtBar.value = Mathf.MoveTowards(_healtBar.value, currentBarValue, _maxDelta * Time.deltaTime);
+			HealtBar.value = Mathf.MoveTowards(HealtBar.value, currentBarValue, _maxDelta * Time.deltaTime);
 			yield return delay;
 		}
 	}

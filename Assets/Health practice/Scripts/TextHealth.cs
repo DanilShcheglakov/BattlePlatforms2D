@@ -16,15 +16,15 @@ public class TextHealth : MonoBehaviour
 
 	private void OnEnable()
 	{
-		_healthClass.ValueChanged += UpdateState;
+		_healthClass.ValueChanged += UpdateTextState;
 	}
 
 	private void OnDisable()
 	{
-		_healthClass.ValueChanged -= UpdateState;
+		_healthClass.ValueChanged -= UpdateTextState;
 	}
 
-	private void UpdateState(int currentHealth)
+	private void UpdateTextState(int currentHealth)
 	{
 		_currentHealth.text = Convert.ToString(currentHealth);
 	}

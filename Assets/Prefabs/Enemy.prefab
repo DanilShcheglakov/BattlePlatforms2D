@@ -873,6 +873,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 1609941492247437262}
     m_Modifications:
     - target: {fileID: 2911768986033287479, guid: 780b88085b58ac7459ae56ab4f46b172, type: 3}
+      propertyPath: HealtBar
+      value: 
+      objectReference: {fileID: 5236560160677267291}
+    - target: {fileID: 2911768986033287479, guid: 780b88085b58ac7459ae56ab4f46b172, type: 3}
+      propertyPath: HealthClass
+      value: 
+      objectReference: {fileID: 4161515468547795465}
+    - target: {fileID: 2911768986033287479, guid: 780b88085b58ac7459ae56ab4f46b172, type: 3}
       propertyPath: _healthClass
       value: 
       objectReference: {fileID: 4161515468547795465}
@@ -990,3 +998,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8935334152755595960, guid: 780b88085b58ac7459ae56ab4f46b172, type: 3}
   m_PrefabInstance: {fileID: 6762815504181362004}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5236560160677267291 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1545200205808957967, guid: 780b88085b58ac7459ae56ab4f46b172, type: 3}
+  m_PrefabInstance: {fileID: 6762815504181362004}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

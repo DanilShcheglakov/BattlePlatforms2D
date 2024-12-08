@@ -1,7 +1,7 @@
-public class SharpHealthBar : BarHealthMotherClass
+public class SharpHealthBar : HealthBar
 {
 	protected override void UpdateState(int currentHealth)
 	{
-		_healtBar.value = ((float)currentHealth) / _healthClass.Max;
+		HealtBar.value = ((float)currentHealth) / HealthClass.Max;
 	}
 }

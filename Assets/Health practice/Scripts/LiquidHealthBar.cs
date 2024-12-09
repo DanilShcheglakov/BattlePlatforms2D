@@ -1,11 +1,18 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class LiquidHealthBar : HealthBar
+public class LiquidHealthBar : HealthHandler
 {
+	[SerializeField] private Slider HealthBar;
 	[SerializeField] private float _maxDelta;
 
 	private Coroutine _healthTaker;
+
+	protected override void SetDefaultState()
+	{
+		HealthBar.value = HealthBar.maxValue;
+	}
 
 	protected override void UpdateState(int currentHealth)
 	{
@@ -21,9 +28,9 @@ public class LiquidHealthBar : HealthBar
 
 		float currentBarValue = ((float)currentHealth) / HealthClass.Max;
 
-		while (currentBarValue != HealtBar.value)
+		while (currentBarValue != HealthBar.value)
 		{
-			HealtBar.value = Mathf.MoveTowards(HealtBar.value, currentBarValue, _maxDelta * Time.deltaTime);
+			HealthBar.value = Mathf.MoveTowards(HealthBar.value, currentBarValue, _maxDelta * Time.deltaTime);
 			yield return delay;
 		}
 	}

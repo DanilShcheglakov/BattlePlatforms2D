@@ -9,6 +9,8 @@ public class Attack : MonoBehaviour
 	private bool _isEnemyInAttackArea;
 	private bool _isRecharged = true;
 
+	private Coroutine _rechargeCorutine;
+
 	private WaitForSeconds _delay;
 
 	public event Action<int> Hitting;
@@ -32,8 +34,10 @@ public class Attack : MonoBehaviour
 
 			_isRecharged = false;
 
-			StartCoroutine(Recharge());
-			StopCoroutine(Recharge());
+			if (_rechargeCorutine != null)
+				StopCoroutine(_rechargeCorutine);
+
+			_rechargeCorutine = StartCoroutine(Recharge());
 		}
 	}
 

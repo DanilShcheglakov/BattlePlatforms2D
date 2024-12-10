@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-	[SerializeField] private GameObject _parentObject;
 	[SerializeField] private EnemyAnimationSettings _animationManager;
 	[SerializeField] private EnemyMover _mover;
 	[SerializeField] private Health _health;
 	[SerializeField] private EnemyVision _vision;
 
 	public event Action BorderFaced;
+	public event Action Died;
 
 	private void OnEnable()
 	{
@@ -56,7 +56,7 @@ public class Enemy : MonoBehaviour
 
 	private void Die()
 	{
-		Destroy(_parentObject);
+		Died?.Invoke();
 	}
 
 	private void SetTarget(Player target)

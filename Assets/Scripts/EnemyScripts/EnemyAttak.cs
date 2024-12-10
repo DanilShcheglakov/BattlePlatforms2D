@@ -8,10 +8,16 @@ public class EnemyAttak : MonoBehaviour
 	[SerializeField] private float _attackSpeed;
 
 	private bool _isThereAttackTarget;
+	private WaitForSeconds _delay;
 
 	private Coroutine _giveDamage;
 
 	public event Action<int> Hitting;
+
+	private void Awake()
+	{
+		_delay = new WaitForSeconds(_attackSpeed);
+	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
@@ -36,13 +42,11 @@ public class EnemyAttak : MonoBehaviour
 
 	private IEnumerator Attak(Player player)
 	{
-		var delay = new WaitForSeconds(_attackSpeed);
-
 		while (_isThereAttackTarget)
 		{
 			Hitting?.Invoke(_damage);
 
-			yield return delay;
+			yield return _delay;
 		}
 	}
 }

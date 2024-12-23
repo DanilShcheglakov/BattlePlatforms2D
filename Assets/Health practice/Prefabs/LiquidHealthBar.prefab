@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HealthClass: {fileID: 0}
-  HealthBar: {fileID: 1545200205808957967}
+  _healthBar: {fileID: 1545200205808957967}
   _maxDelta: 0.1
 --- !u!1 &5240730817086854083
 GameObject:

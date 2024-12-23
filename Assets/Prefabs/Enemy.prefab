@@ -192,7 +192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf2554972b7227149845fe35d063365b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 15
+  _damage: 5
   _attackSpeed: 1
 --- !u!1 &2786418817769626865
 GameObject:
@@ -295,6 +295,7 @@ GameObject:
   - component: {fileID: 6681922299433527760}
   - component: {fileID: 4261150717360927684}
   - component: {fileID: 4268014347706197123}
+  - component: {fileID: 75012722820512138}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -331,7 +332,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animationManager: {fileID: 6522326078768552582}
   _mover: {fileID: 1307258827668138014}
-  _health: {fileID: 4161515468547795465}
+  _health: {fileID: 75012722820512138}
   _vision: {fileID: 7206729440864866902}
 --- !u!70 &4268014347706197123
 CapsuleCollider2D:
@@ -368,6 +369,20 @@ CapsuleCollider2D:
   m_Offset: {x: 0.91, y: 0}
   m_Size: {x: 0.74, y: 1}
   m_Direction: 0
+--- !u!114 &75012722820512138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3839842638203672212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f26cd609c18f05d48abb11356931c208, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _collector: {fileID: 0}
+  <Max>k__BackingField: 100
 --- !u!1 &5964097547583039017
 GameObject:
   m_ObjectHideFlags: 0
@@ -412,7 +427,6 @@ GameObject:
   - component: {fileID: 6433583690719673880}
   - component: {fileID: 4175158292341271624}
   - component: {fileID: 1307258827668138014}
-  - component: {fileID: 4161515468547795465}
   - component: {fileID: 4601337470624309400}
   m_Layer: 0
   m_Name: Enemy
@@ -516,20 +530,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemySpeed: 100
   _enemy: {fileID: 4261150717360927684}
---- !u!114 &4161515468547795465
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7570681929808102365}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f26cd609c18f05d48abb11356931c208, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _collector: {fileID: 0}
-  <Max>k__BackingField: 100
 --- !u!114 &4601337470624309400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -769,11 +769,7 @@ PrefabInstance:
     - target: {fileID: 2911768986033287479, guid: 780b88085b58ac7459ae56ab4f46b172, type: 3}
       propertyPath: HealthClass
       value: 
-      objectReference: {fileID: 4161515468547795465}
-    - target: {fileID: 2911768986033287479, guid: 780b88085b58ac7459ae56ab4f46b172, type: 3}
-      propertyPath: _healthClass
-      value: 
-      objectReference: {fileID: 4161515468547795465}
+      objectReference: {fileID: 75012722820512138}
     - target: {fileID: 3035936882614344180, guid: 780b88085b58ac7459ae56ab4f46b172, type: 3}
       propertyPath: m_Name
       value: LiquidHealthBar

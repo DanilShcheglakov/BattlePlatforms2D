@@ -6,12 +6,15 @@ public class UserInput : MonoBehaviour
 
 	private bool _isSpaceDown;
 	private bool _isAttakButtonDown;
+	private bool _isVampirismButtonDown;
 
 	private KeyCode _jump = KeyCode.Space;
 	private KeyCode _attack = KeyCode.F;
+	private KeyCode _vampirism = KeyCode.E;
 
 	public bool IsJump => GetBoolAsTrigger(ref _isSpaceDown);
 	public bool IsAttack => GetBoolAsTrigger(ref _isAttakButtonDown);
+	public bool IsVampirism => GetBoolAsTrigger(ref _isVampirismButtonDown);
 
 	public float HorizontalAxisValue { get; private set; }
 
@@ -20,6 +23,7 @@ public class UserInput : MonoBehaviour
 		HorizontalAxisValue = ReadHorizontal();
 		_isSpaceDown = IsSpaceDown();
 		_isAttakButtonDown = IsAttackDown();
+		_isVampirismButtonDown = IsVampirismkDown();
 	}
 
 	private float ReadHorizontal()
@@ -35,6 +39,11 @@ public class UserInput : MonoBehaviour
 	private bool IsAttackDown()
 	{
 		return Input.GetKeyDown(_attack);
+	}
+
+	private bool IsVampirismkDown()
+	{
+		return Input.GetKeyDown(_vampirism);
 	}
 
 	private bool GetBoolAsTrigger(ref bool value)

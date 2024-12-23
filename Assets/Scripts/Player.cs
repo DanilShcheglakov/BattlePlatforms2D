@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
 	[SerializeField] private GroundChecker _groundChecker;
 	[SerializeField] private Attack _attack;
 	[SerializeField] private Health _health;
+	[SerializeField] private Vampirism _vampirism;
 
 	private Rigidbody2D _rigidbody;
 	private Vector2 _startPosition;
@@ -36,7 +37,7 @@ public class Player : MonoBehaviour
 		_health.Die -= Die;
 	}
 
-	private void FixedUpdate()
+	private void Update()
 	{
 		Direction = _userInput.HorizontalAxisValue;
 
@@ -53,12 +54,12 @@ public class Player : MonoBehaviour
 
 			Jumping?.Invoke();
 		}
-	}
 
-	private void Update()
-	{
 		if (_userInput.IsAttack)
 			_attack.GiveDamage();
+
+		if (_userInput.IsVampirism)
+			_vampirism.StartAbility();
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision)

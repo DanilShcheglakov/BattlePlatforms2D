@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SharpHealthBar : HealthHandler
+public class SharpHealthBar : HealthBar
 {
 	[SerializeField] private Slider _healthBar;
 

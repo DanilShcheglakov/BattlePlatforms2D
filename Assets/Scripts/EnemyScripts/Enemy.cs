@@ -44,14 +44,14 @@ public class Enemy : MonoBehaviour
 			playerAttack.Hitting -= TakeDamage;
 	}
 
+	public void TakeDamage(int damage)
+	{
+		_health.TakeDamage(damage);
+	}
+
 	private void ChangeDirection()
 	{
 		_animationManager.ChangeDirection();
-	}
-
-	private void TakeDamage(int damage)
-	{
-		_health.TakeDamage(damage);
 	}
 
 	private void Die()

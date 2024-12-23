@@ -2,7 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 
-public class TextHealthDisplay : HealthHandler
+public class TextHealthDisplay : HealthBar
 {
 	[SerializeField] private TextMeshProUGUI _currentHealth;
 	[SerializeField] private TextMeshProUGUI _maxHealth;

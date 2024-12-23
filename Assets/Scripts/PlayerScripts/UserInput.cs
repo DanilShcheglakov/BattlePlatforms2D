@@ -23,7 +23,7 @@ public class UserInput : MonoBehaviour
 		HorizontalAxisValue = ReadHorizontal();
 		_isSpaceDown = IsSpaceDown();
 		_isAttakButtonDown = IsAttackDown();
-		_isVampirismButtonDown = IsVampirismkDown();
+		_isVampirismButtonDown = IsVampirismDown();
 	}
 
 	private float ReadHorizontal()
@@ -41,7 +41,7 @@ public class UserInput : MonoBehaviour
 		return Input.GetKeyDown(_attack);
 	}
 
-	private bool IsVampirismkDown()
+	private bool IsVampirismDown()
 	{
 		return Input.GetKeyDown(_vampirism);
 	}

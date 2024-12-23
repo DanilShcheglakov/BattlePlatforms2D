@@ -45,13 +45,12 @@ public class Vampirism : MonoBehaviour
 				StopCoroutine(exhaustion);
 			}
 
-			exhaustion = StartCoroutine(Exhaustion());
+			exhaustion = StartCoroutine(SuckOutHealth());
 		}
 	}
 
-	private IEnumerator Exhaustion()
+	private IEnumerator SuckOutHealth()
 	{
-
 		while (_energy > 0)
 		{
 			Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, _activeRadius);
@@ -62,11 +61,11 @@ public class Vampirism : MonoBehaviour
 				{
 					Health enemyHealth = enemy.gameObject.GetComponent<Health>();
 
-					int healthBeforeAttac = enemyHealth.Current;
+					int healthBeforeAttak = enemyHealth.Current;
 
 					enemyHealth.TakeDamage(_damage);
 
-					int healAfterAttac = healthBeforeAttac - enemyHealth.Current;
+					int healAfterAttac = healthBeforeAttak - enemyHealth.Current;
 
 					_health.Heal(healAfterAttac);
 				}

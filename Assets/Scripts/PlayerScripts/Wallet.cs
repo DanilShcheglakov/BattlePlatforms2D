@@ -4,7 +4,7 @@ public class Wallet : MonoBehaviour
 {
 	[SerializeField] private Collector _collector;
 
-	public int Amaunt { get; private set; } = 0;
+	public int Amount { get; private set; } = 0;
 
 	private void OnEnable()
 	{
@@ -18,6 +18,6 @@ public class Wallet : MonoBehaviour
 
 	private void AddCoin()
 	{
-		Amaunt++;
+		Amount++;
 	}
 }
